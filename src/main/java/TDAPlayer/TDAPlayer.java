@@ -1,6 +1,10 @@
 package TDAPlayer;
 
-public class TDAPlayer {
+import TDABoard.TDABoard;
+
+import java.util.LinkedList;
+
+public class TDAPlayer{
     private int id;
     private String name;
     private String color;
@@ -45,6 +49,12 @@ public class TDAPlayer {
 
     //setter's
 
+
+    @Override
+    public String toString() {
+        return "Id: "+getId()+", Nombre: "+getName()+", Color: "+getColor()+", Wins: "+getWins()+ ", Losses: "+getLosses()+", Draws: "+getDraws()+", Remaining: "+getRemainingPieces();
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -71,4 +81,6 @@ public class TDAPlayer {
             System.out.println("Error: Las Piezas del jugador deben ser por lo menos 4 y maximo 24");
         }
     }
+
+
 }

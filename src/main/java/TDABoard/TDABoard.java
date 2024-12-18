@@ -1,18 +1,19 @@
 package TDABoard;
 
+
 import java.util.ArrayList;
-import java.util.List;
 
-import TDAPiece.*;
 
-public class TDABoard {
-    private ArrayList<TDACasilla> C1;
-    private ArrayList<TDACasilla> C2;
-    private ArrayList<TDACasilla> C3;
-    private ArrayList<TDACasilla> C4;
-    private ArrayList<TDACasilla> C5;
-    private ArrayList<TDACasilla> C6;
-    private ArrayList<TDACasilla> C7;
+//import TDAPiece.*;
+
+public class TDABoard extends Casilla {
+    private ArrayList<Casilla> C1;
+    private ArrayList<Casilla> C2;
+    private ArrayList<Casilla> C3;
+    private ArrayList<Casilla> C4;
+    private ArrayList<Casilla> C5;
+    private ArrayList<Casilla> C6;
+    private ArrayList<Casilla> C7;
 
     //Constructor
 
@@ -25,13 +26,13 @@ public class TDABoard {
         this.C6 = new ArrayList<>(6);
         this.C7 = new ArrayList<>(6);
         for (int i = 0; i < 6; i++) {
-            TDACasilla aux1 = new TDACasilla();
-            TDACasilla aux2 = new TDACasilla();
-            TDACasilla aux3 = new TDACasilla();
-            TDACasilla aux4 = new TDACasilla();
-            TDACasilla aux5 = new TDACasilla();
-            TDACasilla aux6 = new TDACasilla();
-            TDACasilla aux7 = new TDACasilla();
+            Casilla aux1 = new Casilla();
+            Casilla aux2 = new Casilla();
+            Casilla aux3 = new Casilla();
+            Casilla aux4 = new Casilla();
+            Casilla aux5 = new Casilla();
+            Casilla aux6 = new Casilla();
+            Casilla aux7 = new Casilla();
             C1.add(aux1);
             C2.add(aux2);
             C3.add(aux3);
@@ -44,35 +45,35 @@ public class TDABoard {
 
     //Getter's
 
-    public ArrayList<TDACasilla> getC1() {
+    public ArrayList<Casilla> getC1() {
         return C1;
     }
 
-    public ArrayList<TDACasilla> getC2() {
+    public ArrayList<Casilla> getC2() {
         return C2;
     }
 
-    public ArrayList<TDACasilla> getC3() {
+    public ArrayList<Casilla> getC3() {
         return C3;
     }
 
-    public ArrayList<TDACasilla> getC4() {
+    public ArrayList<Casilla> getC4() {
         return C4;
     }
 
-    public ArrayList<TDACasilla> getC5() {
+    public ArrayList<Casilla> getC5() {
         return C5;
     }
 
-    public ArrayList<TDACasilla> getC6() {
+    public ArrayList<Casilla> getC6() {
         return C6;
     }
 
-    public ArrayList<TDACasilla> getC7() {
+    public ArrayList<Casilla> getC7() {
         return C7;
     }
 
-    public ArrayList<TDACasilla> getColumna(int index) {
+    public ArrayList<Casilla> getColumna(int index) {
         if (index == 0) {
             return getC1();
         }
@@ -138,85 +139,85 @@ public class TDABoard {
 
     //play_piece
 
-    public void playpiece(int index, TDACasilla casilla) {
+    public void playpiece(int index, Casilla casilla) {
         String coloraux = casilla.getColor();
         int idaux = casilla.getCasilla();
         if (index == 0) {
-            if (C1.get(0).getCasilla() != 0) {
+            if (this.getC1().get(0).getCasilla() != 0) {
                 System.out.println("Columna Llena");
             } else {
                 int i = 5;
-                while (C1.get(i).getCasilla() != 0 && i >= 0) {
+                while (this.getC1().get(i).getCasilla() != 0 && i >= 0) {
                     i = i - 1;
                 }
-                C1.get(i).setColor(coloraux);
-                C1.get(i).setId(idaux);
+                this.getC1().get(i).setColor(coloraux);
+                this.getC1().get(i).setId(idaux);
             }
         } else if (index == 1) {
-            if (C2.get(0).getCasilla() != 0) {
+            if (this.getC2().get(0).getCasilla() != 0) {
                 System.out.println("Columna Llena");
             } else {
                 int i = 5;
-                while (C2.get(i).getCasilla() != 0 && i >= 0) {
+                while (this.getC2().get(i).getCasilla() != 0 && i >= 0) {
                     i = i - 1;
                 }
-                C2.get(i).setColor(coloraux);
-                C2.get(i).setId(idaux);
+                this.getC2().get(i).setColor(coloraux);
+                this.getC2().get(i).setId(idaux);
             }
         } else if (index == 2) {
-            if (C3.get(0).getCasilla() != 0) {
+            if (this.getC3().get(0).getCasilla() != 0) {
                 System.out.println("Columna Llena");
             } else {
                 int i = 5;
-                while (C3.get(i).getCasilla() != 0 && i >= 0) {
+                while (this.getC3().get(i).getCasilla() != 0 && i >= 0) {
                     i = i - 1;
                 }
-                C3.get(i).setColor(coloraux);
-                C3.get(i).setId(idaux);
+                this.getC3().get(i).setColor(coloraux);
+                this.getC3().get(i).setId(idaux);
             }
         } else if (index == 3) {
-            if (C4.get(0).getCasilla() != 0) {
+            if (this.getC4().get(0).getCasilla() != 0) {
                 System.out.println("Columna Llena");
             } else {
                 int i = 5;
-                while (C4.get(i).getCasilla() != 0 && i >= 0) {
+                while (this.getC4().get(i).getCasilla() != 0 && i >= 0) {
                     i = i - 1;
                 }
-                C4.get(i).setColor(coloraux);
-                C4.get(i).setId(idaux);
+                this.getC4().get(i).setColor(coloraux);
+                this.getC4().get(i).setId(idaux);
             }
         } else if (index == 4) {
-            if (C5.get(0).getCasilla() != 0) {
+            if (this.getC5().get(0).getCasilla() != 0) {
                 System.out.println("Columna Llena");
             } else {
                 int i = 5;
-                while (C5.get(i).getCasilla() != 0 && i >= 0) {
+                while (this.getC5().get(i).getCasilla() != 0 && i >= 0) {
                     i = i - 1;
                 }
-                C5.get(i).setColor(coloraux);
-                C5.get(i).setId(idaux);
+                this.getC5().get(i).setColor(coloraux);
+                this.getC5().get(i).setId(idaux);
             }
         } else if (index == 5) {
-            if (C6.get(0).getCasilla() != 0) {
+            if (this.getC6().get(0).getCasilla() != 0) {
                 System.out.println("Columna Llena");
             } else {
                 int i = 5;
-                while (C6.get(i).getCasilla() != 0 && i >= 0) {
+                while (this.getC6().get(i).getCasilla() != 0 && i >= 0) {
                     i = i - 1;
                 }
-                C6.get(i).setColor(coloraux);
-                C6.get(i).setId(idaux);
+                this.getC6().get(i).setColor(coloraux);
+                this.getC6().get(i).setId(idaux);
             }
         } else if (index == 6) {
-            if (C7.get(0).getCasilla() != 0) {
+            if (this.getC7().get(0).getCasilla() != 0) {
                 System.out.println("Columna Llena");
             } else {
                 int i = 5;
                 while (C7.get(i).getCasilla() != 0 && i >= 0) {
                     i = i - 1;
                 }
-                C7.get(i).setColor(coloraux);
-                C7.get(i).setId(idaux);
+                this.getC7().get(i).setColor(coloraux);
+                this.getC7().get(i).setId(idaux);
             }
         } else {
             System.out.println("Columna inexistente");
@@ -275,6 +276,43 @@ public class TDABoard {
         }
     }
 
+    public int victoria_diagonal() {
+        int ganador = 0;
+
+        // Recorriendo diagonales ascendentes (de abajo-izquierda a arriba-derecha)
+        for (int i = 3; i <= 5; i++) { // Comienza desde la fila 3 para evitar desbordamientos
+            for (int j = 0; j <= 3; j++) { // Comienza desde la columna 0 para evitar desbordamientos
+                int a = this.getColumna(j).get(i).getCasilla();
+                int b = this.getColumna(j + 1).get(i - 1).getCasilla();
+                int c = this.getColumna(j + 2).get(i - 2).getCasilla();
+                int d = this.getColumna(j + 3).get(i - 3).getCasilla();
+
+                // Verificamos si los 4 elementos consecutivos son iguales y no están vacíos
+                if ((a != 0 && a == b && b == c && c == d)) {
+                    ganador = a;
+                    return ganador; // Retornamos el ID del ganador
+                }
+            }
+        }
+
+        // Recorriendo diagonales descendentes (de arriba-izquierda a abajo-derecha)
+        for (int i = 0; i <= 2; i++) { // Comienza desde la fila 0
+            for (int j = 0; j <= 3; j++) { // Comienza desde la columna 0 para evitar desbordamientos
+                int a = this.getColumna(j).get(i).getCasilla();
+                int b = this.getColumna(j + 1).get(i + 1).getCasilla();
+                int c = this.getColumna(j + 2).get(i + 2).getCasilla();
+                int d = this.getColumna(j + 3).get(i + 3).getCasilla();
+
+                // Verificamos si los 4 elementos consecutivos son iguales y no están vacíos
+                if ((a != 0 && a == b && b == c && c == d)) {
+                    ganador = a;
+                    return ganador; // Retornamos el ID del ganador
+                }
+            }
+        }
+
+        return ganador; // Si no se encuentra un ganador, retornamos 0
+    }
 
     public int entregarGanador(){
         if(this.victoria_vertical()!=0){
@@ -283,19 +321,20 @@ public class TDABoard {
         else if (this.victoria_horizontal()!=0) {
             return this.victoria_horizontal();
         }
-        //else if (this.victoria_diagonal()!=0) {
-        //    return this.victoria_diagonal();
-        //}
+        else if (this.victoria_diagonal()!=0) {
+            return this.victoria_diagonal();
+        }
         else{
             return 0;
         }
     }
 
     //Para de-bug
+    /*
     public static void main(String[] args) {
         TDABoard board = new TDABoard();
-        TDACasilla a = new TDACasilla();
-        TDACasilla b = new TDACasilla();
+        Casilla a = new Casilla();
+        Casilla b = new Casilla();
         a.setId(1);
         a.setColor("rojo");
         b.setId(2);
@@ -304,11 +343,19 @@ public class TDABoard {
         board.can_play();
         board.playpiece(0,b);
         board.playpiece(1,a);
+        board.playpiece(1,b);
         board.playpiece(2,a);
+        board.playpiece(3,b);
+        board.playpiece(2,a);
+        board.playpiece(2,b);
         board.playpiece(3,a);
+        board.playpiece(3,b);
         board.playpiece(4,a);
+        board.playpiece(3,b);
         System.out.println("Victoria Vertical: "+board.victoria_vertical());
         System.out.println("Victoria Horizontal: "+board.victoria_horizontal());
+        System.out.println("Victoria Diagonal: "+board.victoria_diagonal());
         board.getBoard(board);
     }
+    */
 }
