@@ -1,8 +1,5 @@
 package TDAPlayer;
 
-import TDABoard.TDABoard;
-
-import java.util.LinkedList;
 
 public class TDAPlayer{
     private int id;
