@@ -115,4 +115,57 @@ public class TDAGame {
             System.out.println(" Empate ");
         }
     }
+
+    public void realizarMovimiento(TDAPlayer playerAct, int columna ){
+        if(playerAct.getId()==this.getPlayer1().getId() && playerAct.getId()==this.getCurrentTurn()){
+            Casilla aux= new Casilla(playerAct.getColor(), playerAct.getId());
+            board.playpiece(columna,aux);
+            this.setCurrentTurn(this.getPlayer2().getId());
+            this.getPlayer1().setRemainingPieces(this.getPlayer1().getRemainingPieces()-1);
+            History movimiento= new History(playerAct.getId(), columna);
+            this.history.add(movimiento);
+            if(!this.board.can_play()){
+                this.endGame();
+            }
+            else if (this.board.entregarGanador()!=0){
+                this.endGame();
+            }
+            this.boardGetState();
+        }
+        else if(playerAct.getId()==this.getPlayer2().getId() && playerAct.getId()==this.getCurrentTurn()){
+            Casilla aux= new Casilla(playerAct.getColor(), playerAct.getId());
+            board.playpiece(columna,aux);
+            this.setCurrentTurn(this.getPlayer1().getId());
+            this.getPlayer2().setRemainingPieces(this.getPlayer2().getRemainingPieces()-1);
+            History movimiento= new History(playerAct.getId(), columna);
+            this.history.add(movimiento);
+            if(!this.board.can_play()){
+                this.endGame();
+            }
+            else if (this.board.entregarGanador()!=0){
+                this.endGame();
+            }
+            this.boardGetState();
+        }
+    }
+
+    /*
+    public static void main(String[] args){
+        TDABoard b0 = new TDABoard();
+        TDAPlayer p1 = new TDAPlayer(1, "alex","rojo",0,0,0,20);
+        TDAPlayer p2 = new TDAPlayer(2, "fer","verde",0,0,0,20);
+        TDAGame g1 = new TDAGame(p1, p2, b0,2);
+        g1.realizarMovimiento(p2, 0);
+        g1.realizarMovimiento(p1, 1);
+        g1.realizarMovimiento(p2, 1);
+        g1.realizarMovimiento(p1, 2);
+        g1.realizarMovimiento(p2, 2);
+        g1.realizarMovimiento(p1, 3);
+        g1.realizarMovimiento(p2, 2);
+        g1.realizarMovimiento(p1, 3);
+        g1.realizarMovimiento(p2,3);
+        g1.realizarMovimiento(p1,5);
+        g1.realizarMovimiento(p2,3);
+    }
+    */
 }
