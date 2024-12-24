@@ -11,6 +11,7 @@ public class TDAGame {
     private TDABoard board;
     private int currentTurn;
     private ArrayList<History> history;
+    int turnosMaximos;
 
     //Constructor
     public TDAGame(TDAPlayer p1, TDAPlayer p2, TDABoard board, int currentTurn) {
@@ -20,6 +21,7 @@ public class TDAGame {
         this.board = board;
         this.currentTurn = currentTurn;
         this.history = new ArrayList<History>(2*turns);
+        this.turnosMaximos = turns;
     }
 
     //History
@@ -27,6 +29,11 @@ public class TDAGame {
         //int aux = p1.getRemainingPieces();
         System.out.println(this.history);
     }
+
+     @Override
+     public String toString() {
+        return "p1=" + this.getPlayer1().getName() + ", "+ this.getPlayer1().getId() + ", " +this.getPlayer1().getColor() + ", p2=" + this.getPlayer2().getName() + ", "+ this.getPlayer2().getId() + ", " +this.getPlayer2().getColor() + ", Turno de jugador :" + this.getCurrentTurn();
+     }
 
     //Setter's
 
@@ -60,6 +67,9 @@ public class TDAGame {
     }
     public ArrayList<History> getHistory() {
         return history;
+    }
+    public int getTurnosMaximos(){
+        return turnosMaximos;
     }
 
     //Metodos
@@ -101,17 +111,17 @@ public class TDAGame {
         }
         else if(this.getPlayer1().getId()==this.getBoard().entregarGanador()){
             this.getPlayer1().setWins((this.getPlayer1().getWins())+1);
-            this.getPlayer2().setWins((this.getPlayer2().getLosses())+1);
+            this.getPlayer2().setLosses((this.getPlayer2().getLosses())+1);
             System.out.println("Victoria del jugador: " + this.getPlayer1().getId());
         }
         else if(this.getPlayer2().getId()==this.getBoard().entregarGanador()){
-            this.getPlayer1().setWins((this.getPlayer1().getLosses())+1);
+            this.getPlayer1().setLosses((this.getPlayer1().getLosses())+1);
             this.getPlayer2().setWins((this.getPlayer2().getWins())+1);
             System.out.println("Victoria del jugador: " + this.getPlayer2().getId());
         }
         else if(this.getPlayer1().getId()==this.getBoard().entregarGanador()){
-            this.getPlayer2().setWins((this.getPlayer2().getDraws())+1);
-            this.getPlayer1().setWins((this.getPlayer1().getDraws())+1);
+            this.getPlayer2().setDraws((this.getPlayer2().getDraws())+1);
+            this.getPlayer1().setDraws((this.getPlayer1().getDraws())+1);
             System.out.println(" Empate ");
         }
     }
@@ -149,23 +159,4 @@ public class TDAGame {
         }
     }
 
-    /*
-    public static void main(String[] args){
-        TDABoard b0 = new TDABoard();
-        TDAPlayer p1 = new TDAPlayer(1, "alex","rojo",0,0,0,20);
-        TDAPlayer p2 = new TDAPlayer(2, "fer","verde",0,0,0,20);
-        TDAGame g1 = new TDAGame(p1, p2, b0,2);
-        g1.realizarMovimiento(p2, 0);
-        g1.realizarMovimiento(p1, 1);
-        g1.realizarMovimiento(p2, 1);
-        g1.realizarMovimiento(p1, 2);
-        g1.realizarMovimiento(p2, 2);
-        g1.realizarMovimiento(p1, 3);
-        g1.realizarMovimiento(p2, 2);
-        g1.realizarMovimiento(p1, 3);
-        g1.realizarMovimiento(p2,3);
-        g1.realizarMovimiento(p1,5);
-        g1.realizarMovimiento(p2,3);
-    }
-    */
 }

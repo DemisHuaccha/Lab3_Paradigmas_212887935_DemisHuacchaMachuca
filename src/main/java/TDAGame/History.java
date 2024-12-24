@@ -16,4 +16,8 @@ public class History {
     public int getColumn() {
         return column;
     }
+
+    public String toString() {
+        return "id: " + this.id + ", column: " + this.column;
+    }
 }

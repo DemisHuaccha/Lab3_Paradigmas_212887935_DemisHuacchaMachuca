@@ -71,12 +71,7 @@ public class TDAPlayer{
         this.draws = draws;
     }
     public void setRemainingPieces(int remainingPieces) {
-        if(remainingPieces >= 4 && remainingPieces <= 24) {
             this.remainingPieces = remainingPieces;
-        }
-        else{
-            System.out.println("Error: Las Piezas del jugador deben ser por lo menos 4 y maximo 24");
-        }
     }
 
 
