@@ -1,11 +1,11 @@
 package TDAGame;
 import TDABoard.*;
 import TDAPlayer.*;
-import TDAGame.History;
+
 
 import java.util.ArrayList;
 
-public class TDAGame {
+public class TDAGame extends History{
     private TDAPlayer p1;
     private TDAPlayer p2;
     private TDABoard board;
@@ -15,6 +15,7 @@ public class TDAGame {
 
     //Constructor
     public TDAGame(TDAPlayer p1, TDAPlayer p2, TDABoard board, int currentTurn) {
+        super();
         int turns = p1.getRemainingPieces();
         this.p1 = p1;
         this.p2 = p2;
@@ -25,9 +26,8 @@ public class TDAGame {
     }
 
     //History
-    public void history(){
-        //int aux = p1.getRemainingPieces();
-        System.out.println(this.history);
+    public History history( int mov, int id){
+        return new History(mov, id);
     }
 
      @Override
@@ -103,25 +103,24 @@ public class TDAGame {
     //End Game
 
     public void endGame(){
-
         if(!this.board.can_play()){
-            this.getPlayer1().setDraws(this.getPlayer1().getDraws()+1);
-            this.getPlayer2().setDraws(this.getPlayer2().getDraws()+1);
+            this.getPlayer1().actualizarEstadisticas(0);
+            this.getPlayer2().actualizarEstadisticas(0);
             System.out.println(" Empate ");
         }
         else if(this.getPlayer1().getId()==this.getBoard().entregarGanador()){
-            this.getPlayer1().setWins((this.getPlayer1().getWins())+1);
-            this.getPlayer2().setLosses((this.getPlayer2().getLosses())+1);
+            this.getPlayer1().actualizarEstadisticas(1);
+            this.getPlayer2().actualizarEstadisticas(2);
             System.out.println("Victoria del jugador: " + this.getPlayer1().getId());
         }
         else if(this.getPlayer2().getId()==this.getBoard().entregarGanador()){
-            this.getPlayer1().setLosses((this.getPlayer1().getLosses())+1);
-            this.getPlayer2().setWins((this.getPlayer2().getWins())+1);
+            this.getPlayer1().actualizarEstadisticas(2);
+            this.getPlayer2().actualizarEstadisticas(1);
             System.out.println("Victoria del jugador: " + this.getPlayer2().getId());
         }
-        else if(this.getPlayer1().getId()==this.getBoard().entregarGanador()){
-            this.getPlayer2().setDraws((this.getPlayer2().getDraws())+1);
-            this.getPlayer1().setDraws((this.getPlayer1().getDraws())+1);
+        else if(this.getBoard().entregarGanador()==0){
+            this.getPlayer2().actualizarEstadisticas(0);
+            this.getPlayer1().actualizarEstadisticas(0);
             System.out.println(" Empate ");
         }
     }
@@ -132,30 +131,28 @@ public class TDAGame {
             board.playpiece(columna,aux);
             this.setCurrentTurn(this.getPlayer2().getId());
             this.getPlayer1().setRemainingPieces(this.getPlayer1().getRemainingPieces()-1);
-            History movimiento= new History(playerAct.getId(), columna);
-            this.history.add(movimiento);
+            this.history.add(history(playerAct.getId(), columna));
             if(!this.board.can_play()){
                 this.endGame();
             }
             else if (this.board.entregarGanador()!=0){
                 this.endGame();
             }
-            this.boardGetState();
+            //this.boardGetState();
         }
         else if(playerAct.getId()==this.getPlayer2().getId() && playerAct.getId()==this.getCurrentTurn()){
             Casilla aux= new Casilla(playerAct.getColor(), playerAct.getId());
             board.playpiece(columna,aux);
             this.setCurrentTurn(this.getPlayer1().getId());
             this.getPlayer2().setRemainingPieces(this.getPlayer2().getRemainingPieces()-1);
-            History movimiento= new History(playerAct.getId(), columna);
-            this.history.add(movimiento);
+            this.history.add(history(playerAct.getId(), columna));
             if(!this.board.can_play()){
                 this.endGame();
             }
             else if (this.board.entregarGanador()!=0){
                 this.endGame();
             }
-            this.boardGetState();
+            //this.boardGetState();
         }
     }
 

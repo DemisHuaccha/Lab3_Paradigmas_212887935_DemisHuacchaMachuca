@@ -9,6 +9,10 @@ public class History {
         this.id = id;
         this.column = column;
     }
+
+    public History() {
+    }
+
     //Getter's
     public int getId() {
         return id;

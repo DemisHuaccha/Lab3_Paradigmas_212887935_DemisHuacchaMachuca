@@ -224,16 +224,7 @@ public class TDABoard extends Casilla {
         }
     }
 
-    public boolean repetido4(int a, int b, int c, int d) {
-        if (a == b && b == c && c == d) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public int victoria_vertical() {
-        int comprobador = 0;
         int ganador = 0;
         for (int i = 0; i <= 6; i++) {
             for (int j = 0; j < 3; j++) {
@@ -241,21 +232,18 @@ public class TDABoard extends Casilla {
                 int b = this.getColumna(i).get(j + 1).getCasilla();
                 int c = this.getColumna(i).get(j + 2).getCasilla();
                 int d = this.getColumna(i).get(j + 3).getCasilla();
-                if ((a != 0 || b != 0 || c != 0 || d != 0) && this.repetido4(a, b, c, d)) {
-                    comprobador = 1;
+                if (a != 0 && a == b && b == c && c == d ){
                     ganador = a;
+                    return ganador;
                 }
             }
         }
-        if (comprobador == 0) {
-            return 0;
-        } else {
-            return ganador;
-        }
+
+        return ganador;
     }
 
     public int victoria_horizontal() {
-        int comprobador = 0;
+
         int ganador = 0;
         for (int i = 0; i <= 5; i++) {
             for (int j = 0; j < 4; j++) {
@@ -263,55 +251,49 @@ public class TDABoard extends Casilla {
                 int b = this.getColumna(j + 1).get(i).getCasilla();
                 int c = this.getColumna(j + 2).get(i).getCasilla();
                 int d = this.getColumna(j + 3).get(i).getCasilla();
-                if ((a != 0 || b != 0 || c != 0 || d != 0) && this.repetido4(a, b, c, d)) {
-                    comprobador = 1;
+                if (a != 0 && a == b && b == c && c == d){
                     ganador = a;
+                    return ganador;
                 }
             }
         }
-        if (comprobador == 0) {
-            return 0;
-        } else {
-            return ganador;
-        }
+        return ganador;
     }
 
     public int victoria_diagonal() {
         int ganador = 0;
 
-        // Recorriendo diagonales ascendentes (de abajo-izquierda a arriba-derecha)
-        for (int i = 3; i <= 5; i++) { // Comienza desde la fila 3 para evitar desbordamientos
-            for (int j = 0; j <= 3; j++) { // Comienza desde la columna 0 para evitar desbordamientos
+        for (int i = 3; i <= 5; i++) {
+            for (int j = 0; j <= 3; j++) {
                 int a = this.getColumna(j).get(i).getCasilla();
                 int b = this.getColumna(j + 1).get(i - 1).getCasilla();
                 int c = this.getColumna(j + 2).get(i - 2).getCasilla();
                 int d = this.getColumna(j + 3).get(i - 3).getCasilla();
 
-                // Verificamos si los 4 elementos consecutivos son iguales y no están vacíos
                 if ((a != 0 && a == b && b == c && c == d)) {
                     ganador = a;
-                    return ganador; // Retornamos el ID del ganador
+                    return ganador;
                 }
             }
         }
 
-        // Recorriendo diagonales descendentes (de arriba-izquierda a abajo-derecha)
-        for (int i = 0; i <= 2; i++) { // Comienza desde la fila 0
-            for (int j = 0; j <= 3; j++) { // Comienza desde la columna 0 para evitar desbordamientos
+
+        for (int i = 0; i <= 2; i++) {
+            for (int j = 0; j <= 3; j++) {
                 int a = this.getColumna(j).get(i).getCasilla();
                 int b = this.getColumna(j + 1).get(i + 1).getCasilla();
                 int c = this.getColumna(j + 2).get(i + 2).getCasilla();
                 int d = this.getColumna(j + 3).get(i + 3).getCasilla();
 
-                // Verificamos si los 4 elementos consecutivos son iguales y no están vacíos
+
                 if ((a != 0 && a == b && b == c && c == d)) {
                     ganador = a;
-                    return ganador; // Retornamos el ID del ganador
+                    return ganador;
                 }
             }
         }
 
-        return ganador; // Si no se encuentra un ganador, retornamos 0
+        return ganador;
     }
 
     public int entregarGanador(){

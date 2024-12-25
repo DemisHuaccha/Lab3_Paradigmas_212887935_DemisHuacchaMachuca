@@ -74,5 +74,23 @@ public class TDAPlayer{
             this.remainingPieces = remainingPieces;
     }
 
+    public void actualizarEstadisticas(int resultado) {
+        // 0 = empate
+        // 1 = ganador el jugador
+        // 2 = pierde el jugador
+        if(resultado == 0){
+            this.setDraws(this.getDraws()+1);
+            System.out.println(" Empate ");
+        }
+        else if(resultado == 1){
+            this.setWins((this.getWins())+1);
+            System.out.println("Victoria del jugador: " + this.getId());
+        }
+        else if(resultado == 2){
+            this.setLosses((this.getLosses())+1);
+            System.out.println("Victoria del jugador: " + this.getId());
+        }
+    }
+
 
 }
