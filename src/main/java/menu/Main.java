@@ -1,68 +1,21 @@
 package menu;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 import TDABoard.*;
 import TDAGame.*;
 import TDAPlayer.*;
 
-//Linea de comando para ejecutar el programa
-//java -cp build/classes/java/main menu.Main
 
 /**
  * La clase Main contiene la lógica principal de un juego interactivo,
- * permitiendo la creación y visualización de jugadores y juegos, así como
- * la gestión de turnos y la verificación de duplicados. Implementa la interfaz verificar para manejar
- * la verificación de jugadores y el control de turnos.
+ * permitiendo la creación y visualización de jugadores y juegos.
  * Esta clase contiene un menú interactivo que permite al usuario realizar
  * diversas acciones relacionadas con los jugadores y juegos, incluyendo la
  * creación de jugadores, la visualización de estadísticas generales y la
  * gestión del flujo de un juego.
  */
-public class Main implements verificar {
-
-
-    /**
-     * Verifica si un jugador con un identificador o color específico ya existe en la lista de jugadores.
-     *
-     * @param lista La lista de jugadores donde se busca la existencia de duplicados.
-     * @param p El jugador que se desea verificar.
-     * @return  true si el jugador no está duplicado, y false si ya existe un jugador con el mismo identificador o color.
-     */
-    @Override
-    public boolean verificarDuplicados(LinkedList<TDAPlayer> lista, TDAPlayer p) {
-        int largo = lista.size();
-        for (int i = 0; i < largo; i++) {
-            if (p.getId() == lista.get(i).getId() || p.getColor().equals(lista.get(i).getColor())){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Verifica y ajusta la cantidad de piezas restantes para cada jugador basado en el número de turnos
-     * registrados en el historial y los turnos maximos registrados en un juego .
-     *
-     * @param history El historial de jugadas realizado en un juego.
-     * @param g El objeto TDAJuegos que contiene los jugadores y el número máximo de turnos.
-     */
-    @Override
-    public void verificarTurnos(ArrayList<History> history, TDAGame g){
-        if(history.size() == g.getTurnosMaximos()){
-            g.getPlayer1().setRemainingPieces(0);
-            g.getPlayer2().setRemainingPieces(0);
-        }
-        else if((history.size()%2) !=0){
-            g.getPlayer1().setRemainingPieces(g.getTurnosMaximos()-(history.size()/2));
-            g.getPlayer2().setRemainingPieces(g.getTurnosMaximos()-(history.size()/2)+1);
-        }
-        else{
-            g.getPlayer1().setRemainingPieces(g.getTurnosMaximos()-history.size()/2);
-            g.getPlayer2().setRemainingPieces(g.getTurnosMaximos()-history.size()/2);
-        }
-    }
+public class Main {
 
     /**
      * Método principal que ejecuta el menú interactivo del juego.
@@ -236,53 +189,57 @@ public class Main implements verificar {
                     int largo = juegos.size();
                     for (int i = 0; i < largo; i++) {
                         System.out.println("Juego "+(i + 1) + " :");
-                        System.out.println("Jugador 1: " + juegos.get(i).getPlayer2());
-                        System.out.println("Jugador 2: " + juegos.get(i).getPlayer1());
+                        System.out.println("Jugador 1: " + juegos.get(i).getPlayer1());
+                        System.out.println("Jugador 2: " + juegos.get(i).getPlayer2());
                     }
                     System.out.println("Seleccione un juego: ");
+                    System.out.println(("Para volver al menu anterior ingrese cualquier palabro o un numero que no corresponda a un juego"));
                     int auxJuego;
 
                     try {
-                        System.out.println("Ingrese una opcion: ");
                         input = scannerPrincipal.nextLine();
                         auxJuego = Integer.parseInt(input);
-
-                        TDABoard auxboard = juegos.get(auxJuego - 1).getBoard();
-                        int aux;
-                        app.verificarTurnos(juegos.get(auxJuego-1).getHistory(), juegos.get(auxJuego-1));
-                        if(juegos.get(auxJuego-1).getBoard().entregarGanador()!=0) {
-                            System.out.println("Juego Terminado");
-                            System.out.println("Id Ganador :"+ juegos.get(auxJuego-1).getBoard().entregarGanador());
+                        if(auxJuego > juegos.size()){
+                            System.out.println("No existe el juego");
                         }
-                        while ( auxboard.entregarGanador() == 0 && !juegos.get(auxJuego-1).isDraw()){
-                            System.out.println("Turno del jugador: " + juegos.get(auxJuego - 1).getCurrentPlayer());
-                            System.out.println("Estado del juego (Victoria) : " + juegos.get(auxJuego - 1).getBoard().entregarGanador());
-                            System.out.println(juegos.get(auxJuego - 1).getBoard().toString());
-                            System.out.println("Columna donde colocar pieza: ");
-                            System.out.println("  0   -   1   -   2   -   3   -   4   -   5   -  6  ");
-                            juegos.get(auxJuego-1).boardGetState();
-                            try {
-                                input = scannerPrincipal.nextLine();
-                                aux = Integer.parseInt(input);
-                                if(auxboard.entregarGanador() != 0 || juegos.get(auxJuego-1).isDraw()){
-                                    break;
-                                }
-
-                                juegos.get(auxJuego - 1).realizarMovimiento(juegos.get(auxJuego - 1).getCurrentPlayer(), aux);
-                                System.out.println("Continuar juego? (S = 1 o cualquier palabra / N = Numero distinto de 1");
-                                int auxfin;
+                        else {
+                            TDABoard auxboard = juegos.get(auxJuego - 1).getBoard();
+                            int aux;
+                            juegos.get(auxJuego - 1).verificarTurnos(juegos.get(auxJuego - 1).getHistory());
+                            if (juegos.get(auxJuego - 1).getBoard().entregarGanador() != 0) {
+                                System.out.println("Juego Terminado");
+                                System.out.println("Id Ganador :" + juegos.get(auxJuego - 1).getBoard().entregarGanador());
+                            }
+                            while (auxboard.entregarGanador() == 0 && !juegos.get(auxJuego - 1).isDraw()) {
+                                System.out.println("Turno del jugador: " + juegos.get(auxJuego - 1).getCurrentPlayer());
+                                System.out.println("Estado del juego (Victoria) : " + juegos.get(auxJuego - 1).getBoard().entregarGanador());
+                                System.out.println(juegos.get(auxJuego - 1).getBoard().toString());
+                                System.out.println("Columna donde colocar pieza: ");
+                                System.out.println("  0   -   1   -   2   -   3   -   4   -   5   -  6  ");
+                                juegos.get(auxJuego - 1).boardGetState();
                                 try {
-                                    System.out.println("Ingrese una opcion: ");
                                     input = scannerPrincipal.nextLine();
-                                    auxfin = Integer.parseInt(input);
-                                    if (auxfin!=1){
+                                    aux = Integer.parseInt(input);
+                                    if (auxboard.entregarGanador() != 0 || juegos.get(auxJuego - 1).isDraw()) {
                                         break;
+                                    }
+
+                                    juegos.get(auxJuego - 1).realizarMovimiento(juegos.get(auxJuego - 1).getCurrentPlayer(), aux);
+                                    System.out.println("Continuar juego? (S = 1 o cualquier palabra / N = Numero distinto de 1");
+                                    int auxfin;
+                                    try {
+                                        System.out.println("Ingrese una opcion: ");
+                                        input = scannerPrincipal.nextLine();
+                                        auxfin = Integer.parseInt(input);
+                                        if (auxfin != 1) {
+                                            break;
+                                        }
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Debes ingresar un numero entero.");
                                     }
                                 } catch (NumberFormatException e) {
                                     System.out.println("Debes ingresar un numero entero.");
                                 }
-                            } catch (NumberFormatException e) {
-                                System.out.println("Debes ingresar un numero entero.");
                             }
                         }
                     } catch (NumberFormatException e) {
@@ -303,6 +260,8 @@ public class Main implements verificar {
         scannerPrincipal.close();
     }
 }
+
+
 
 
 
