@@ -10,8 +10,26 @@ import TDAPlayer.*;
 //Linea de comando para ejecutar el programa
 //java -cp build/classes/java/main menu.Main
 
+/**
+ * La clase Main contiene la lógica principal de un juego interactivo,
+ * permitiendo la creación y visualización de jugadores y juegos, así como
+ * la gestión de turnos y la verificación de duplicados. Implementa la interfaz verificar para manejar
+ * la verificación de jugadores y el control de turnos.
+ * Esta clase contiene un menú interactivo que permite al usuario realizar
+ * diversas acciones relacionadas con los jugadores y juegos, incluyendo la
+ * creación de jugadores, la visualización de estadísticas generales y la
+ * gestión del flujo de un juego.
+ */
 public class Main implements verificar {
 
+
+    /**
+     * Verifica si un jugador con un identificador o color específico ya existe en la lista de jugadores.
+     *
+     * @param lista La lista de jugadores donde se busca la existencia de duplicados.
+     * @param p El jugador que se desea verificar.
+     * @return  true si el jugador no está duplicado, y false si ya existe un jugador con el mismo identificador o color.
+     */
     @Override
     public boolean verificarDuplicados(LinkedList<TDAPlayer> lista, TDAPlayer p) {
         int largo = lista.size();
@@ -23,6 +41,13 @@ public class Main implements verificar {
         return true;
     }
 
+    /**
+     * Verifica y ajusta la cantidad de piezas restantes para cada jugador basado en el número de turnos
+     * registrados en el historial y los turnos maximos registrados en un juego .
+     *
+     * @param history El historial de jugadas realizado en un juego.
+     * @param g El objeto TDAJuegos que contiene los jugadores y el número máximo de turnos.
+     */
     @Override
     public void verificarTurnos(ArrayList<History> history, TDAGame g){
         if(history.size() == g.getTurnosMaximos()){
@@ -39,6 +64,13 @@ public class Main implements verificar {
         }
     }
 
+    /**
+     * Método principal que ejecuta el menú interactivo del juego.
+     * Permite la creación y visualizacion de los jugadores,y de los juegos,
+     * ademas de la gestión de turnos para jugar.
+     *
+     * @param args Los argumentos de la línea de comandos (no utilizados en este caso).
+     */
 
     public static void main(String[] args) {
 

@@ -4,8 +4,12 @@ package TDABoard;
 import java.util.ArrayList;
 
 
-//import TDAPiece.*;
-
+/**
+ * La clase TDABoard representa el tablero del juego "Conecta 4", donde el tablero tiene 7 columnas y cada una tiene 6
+ * casillas representadas por los objetos Casilla.
+ * Permite realizar acciones como colocar piezas en las columnas, mostrar el estado del tablero y verificar si hay un
+ * ganador, empate o si se puede continuar jugando en el tablero
+ */
 public class TDABoard extends Casilla {
     private ArrayList<Casilla> C1;
     private ArrayList<Casilla> C2;
@@ -17,6 +21,10 @@ public class TDABoard extends Casilla {
 
     //Constructor
 
+    /**
+     * Constructor que crea un nuevo tablero de juego con 7 columnas, cada una con 6 celdas vacías.
+     * Inicializa cada columna con un objeto Casilla vacío.
+     */
     public TDABoard() {
         this.C1 = new ArrayList<>(6);
         this.C2 = new ArrayList<>(6);
@@ -44,6 +52,12 @@ public class TDABoard extends Casilla {
     }
 
     //Getter's
+
+    /**
+     * Obtiene la primera columna (C1) del tablero de juego.
+     * @return la primera columna (C1).
+     */
+    // lo mismo para los siguientes getC*
 
     public ArrayList<Casilla> getC1() {
         return C1;
@@ -73,6 +87,11 @@ public class TDABoard extends Casilla {
         return C7;
     }
 
+    /**
+     * Obtiene la columna en la posición especificada por el índice.
+     * @param index el índice de la columna (de 0 a 6).
+     * @return la columna correspondiente al índice especificado, o  null si el índice no es válido.
+     */
     public ArrayList<Casilla> getColumna(int index) {
         if (index == 0) {
             return getC1();
@@ -101,13 +120,23 @@ public class TDABoard extends Casilla {
 
     //ToString()
 
+    /**
+     * Convierte el índice de una fila en una representación en forma de String del tablero.
+     * Cada columna se representa por su objeto  Casilla correspondiente.
+     * @param i el índice de la fila (de 0 a 5).
+     * @return un String que representa las celdas de todas las columnas en la fila especificada.
+     */
     public String toString(int i) {
         return "" + C1.get(i).toString() + "   " + C2.get(i).toString() + "   " + C3.get(i).toString() + "   " + C4.get(i).toString() + "   " + C5.get(i).toString() + "   " + C6.get(i).toString() + "   " + C7.get(i).toString();
     }
 
     //Metodos
 
-    //Impresion en pantalla del tablero
+    /**
+     * Muestra el estado del tablero en la consola.
+     * Imprime las columnas del tablero en pantalla.
+     * @param board el objeto  TDABoard que se va a mostrar.
+     */
     public void getBoard(TDABoard board) {
         System.out.println("  C1      C2      C3      C4      C5      C6      C7");
         for (int i = 0; i < 6; i++) {
@@ -116,6 +145,10 @@ public class TDABoard extends Casilla {
     }
 
     //can-play
+    /**
+     * Verifica si hay espacio disponible para jugar en alguna de las columnas.
+     * @return  true si hay espacio disponible, false si no lo hay.
+     */
     public boolean can_play() {
         if (getC1().get(0).getCasilla() == 0) {
             return true;
@@ -138,7 +171,11 @@ public class TDABoard extends Casilla {
 
 
     //play_piece
-
+    /**
+     * Coloca una pieza en la columna especificada, si la columna está llena muestra un mensaje de error.
+     * @param index el índice de la columna en la que se va a colocar la pieza (de 0 a 6).
+     * @param casilla el objeto Casilla que representa la pieza que se va a colocar.
+     */
     public void playpiece(int index, Casilla casilla) {
         String coloraux = casilla.getColor();
         int idaux = casilla.getCasilla();
@@ -224,6 +261,10 @@ public class TDABoard extends Casilla {
         }
     }
 
+    /**
+     * Verifica si hay un objeto Casilla  que se repita 4 veces en alguna columna.
+     * @return el ID del jugador 1 o 2 si hay un ganador, o 0 si no hay ganador.
+     */
     public int victoria_vertical() {
         int ganador = 0;
         for (int i = 0; i <= 6; i++) {
@@ -242,6 +283,10 @@ public class TDABoard extends Casilla {
         return ganador;
     }
 
+    /**
+     * Verifica si hay un objeto Casilla que se repita 4 veces en alguna fila.
+     * @return el ID del jugador 1 o 2 si hay un ganador, o 0 si no hay ganador.
+     */
     public int victoria_horizontal() {
 
         int ganador = 0;
@@ -260,6 +305,10 @@ public class TDABoard extends Casilla {
         return ganador;
     }
 
+    /**
+     * Verifica si hay un objeto Casilla que se repita 4 veces en alguna dirección diagonal.
+     * @return el ID del jugador 1 o 2 si hay un ganador, o 0 si no hay ganador.
+     */
     public int victoria_diagonal() {
         int ganador = 0;
 
@@ -296,6 +345,10 @@ public class TDABoard extends Casilla {
         return ganador;
     }
 
+    /**
+     * Verifica si hay un objeto Casilla que se repita 4 veces en las direcciónes horizontal, vertical o diagonal.
+     * @return el ID del jugador 1 o 2 si hay un ganador, o 0 si no hay ganador.
+     */
     public int entregarGanador(){
         if(this.victoria_vertical()!=0){
             return this.victoria_vertical();
@@ -310,34 +363,4 @@ public class TDABoard extends Casilla {
             return 0;
         }
     }
-
-    //Para de-bug
-    /*
-    public static void main(String[] args) {
-        TDABoard board = new TDABoard();
-        Casilla a = new Casilla();
-        Casilla b = new Casilla();
-        a.setId(1);
-        a.setColor("rojo");
-        b.setId(2);
-        b.setColor("verde");
-        board.can_play();
-        board.can_play();
-        board.playpiece(0,b);
-        board.playpiece(1,a);
-        board.playpiece(1,b);
-        board.playpiece(2,a);
-        board.playpiece(3,b);
-        board.playpiece(2,a);
-        board.playpiece(2,b);
-        board.playpiece(3,a);
-        board.playpiece(3,b);
-        board.playpiece(4,a);
-        board.playpiece(3,b);
-        System.out.println("Victoria Vertical: "+board.victoria_vertical());
-        System.out.println("Victoria Horizontal: "+board.victoria_horizontal());
-        System.out.println("Victoria Diagonal: "+board.victoria_diagonal());
-        board.getBoard(board);
-    }
-    */
 }
