@@ -5,7 +5,7 @@ package TDABoard;
  * La clase Casilla representa una casilla en un tablero de juego.
  * Cada casilla tiene un identificador y un color, que indican el jugador que ocupa la casilla.
  */
-public class Casilla {
+public class TDAPiece {
     private int id;
     private String color;
     //constructor
@@ -13,16 +13,26 @@ public class Casilla {
     /**
      * Constructor por defecto. Inicializa la casilla con un identificador de 0 (vacio) para trabajar internamente y "Vacio" como color.
      */
-    public Casilla(){
+    public TDAPiece(){
         this.id = 0;
         this.color="Vacio";
     }
+
+    /**
+     * Constructor que inicializa la casilla con un color específico.
+     * @param color el color de la casilla (representa el jugador que ocupa la casilla).
+     */
+    public TDAPiece(String color){
+        this.id = 0;
+        this.color=color;
+    }
+
     /**
      * Constructor que inicializa la casilla con un color y un identificador específicos.
      * @param color el color de la casilla (representa el jugador que ocupa la casilla).
      * @param identificador el identificador único de la casilla  para los jugadores.
      */
-    public Casilla(String color, int identificador) {
+    public TDAPiece(String color, int identificador) {
         this.color=color;
         this.id=identificador;
     }
