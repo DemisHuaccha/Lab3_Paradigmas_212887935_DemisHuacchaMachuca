@@ -1,6 +1,0 @@
-rootProject.name = 'Lab3_21288793_HuacchaMachuca'
-//include 'src:main:TDAPlayer'
-//findProject(':src:main:TDAPlayer')?.name = 'TDAPlayer'
-//include 'src:TDAPlayer'
-//findProject(':src:TDAPlayer')?.name = 'TDAPlayer'
-
