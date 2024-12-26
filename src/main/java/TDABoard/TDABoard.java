@@ -10,14 +10,14 @@ import java.util.ArrayList;
  * Permite realizar acciones como colocar piezas en las columnas, mostrar el estado del tablero y verificar si hay un
  * ganador, empate o si se puede continuar jugando en el tablero
  */
-public class TDABoard extends Casilla {
-    private ArrayList<Casilla> C1;
-    private ArrayList<Casilla> C2;
-    private ArrayList<Casilla> C3;
-    private ArrayList<Casilla> C4;
-    private ArrayList<Casilla> C5;
-    private ArrayList<Casilla> C6;
-    private ArrayList<Casilla> C7;
+public class TDABoard extends TDAPiece {
+    private ArrayList<TDAPiece> C1;
+    private ArrayList<TDAPiece> C2;
+    private ArrayList<TDAPiece> C3;
+    private ArrayList<TDAPiece> C4;
+    private ArrayList<TDAPiece> C5;
+    private ArrayList<TDAPiece> C6;
+    private ArrayList<TDAPiece> C7;
 
     //Constructor
 
@@ -34,13 +34,13 @@ public class TDABoard extends Casilla {
         this.C6 = new ArrayList<>(6);
         this.C7 = new ArrayList<>(6);
         for (int i = 0; i < 6; i++) {
-            Casilla aux1 = new Casilla();
-            Casilla aux2 = new Casilla();
-            Casilla aux3 = new Casilla();
-            Casilla aux4 = new Casilla();
-            Casilla aux5 = new Casilla();
-            Casilla aux6 = new Casilla();
-            Casilla aux7 = new Casilla();
+            TDAPiece aux1 = new TDAPiece();
+            TDAPiece aux2 = new TDAPiece();
+            TDAPiece aux3 = new TDAPiece();
+            TDAPiece aux4 = new TDAPiece();
+            TDAPiece aux5 = new TDAPiece();
+            TDAPiece aux6 = new TDAPiece();
+            TDAPiece aux7 = new TDAPiece();
             C1.add(aux1);
             C2.add(aux2);
             C3.add(aux3);
@@ -59,31 +59,31 @@ public class TDABoard extends Casilla {
      */
     // lo mismo para los siguientes getC*
 
-    public ArrayList<Casilla> getC1() {
+    public ArrayList<TDAPiece> getC1() {
         return C1;
     }
 
-    public ArrayList<Casilla> getC2() {
+    public ArrayList<TDAPiece> getC2() {
         return C2;
     }
 
-    public ArrayList<Casilla> getC3() {
+    public ArrayList<TDAPiece> getC3() {
         return C3;
     }
 
-    public ArrayList<Casilla> getC4() {
+    public ArrayList<TDAPiece> getC4() {
         return C4;
     }
 
-    public ArrayList<Casilla> getC5() {
+    public ArrayList<TDAPiece> getC5() {
         return C5;
     }
 
-    public ArrayList<Casilla> getC6() {
+    public ArrayList<TDAPiece> getC6() {
         return C6;
     }
 
-    public ArrayList<Casilla> getC7() {
+    public ArrayList<TDAPiece> getC7() {
         return C7;
     }
 
@@ -92,7 +92,7 @@ public class TDABoard extends Casilla {
      * @param index el índice de la columna (de 0 a 6).
      * @return la columna correspondiente al índice especificado, o  null si el índice no es válido.
      */
-    public ArrayList<Casilla> getColumna(int index) {
+    public ArrayList<TDAPiece> getColumna(int index) {
         if (index == 0) {
             return getC1();
         }
@@ -174,11 +174,11 @@ public class TDABoard extends Casilla {
     /**
      * Coloca una pieza en la columna especificada, si la columna está llena muestra un mensaje de error.
      * @param index el índice de la columna en la que se va a colocar la pieza (de 0 a 6).
-     * @param casilla el objeto Casilla que representa la pieza que se va a colocar.
+     * @param TDAPiece el objeto Casilla que representa la pieza que se va a colocar.
      */
-    public void playpiece(int index, Casilla casilla) {
-        String coloraux = casilla.getColor();
-        int idaux = casilla.getCasilla();
+    public void playpiece(int index, TDAPiece TDAPiece) {
+        String coloraux = TDAPiece.getColor();
+        int idaux = TDAPiece.getCasilla();
         if (index == 0) {
             if (this.getC1().get(0).getCasilla() != 0) {
                 System.out.println("Columna Llena");
@@ -364,3 +364,4 @@ public class TDABoard extends Casilla {
         }
     }
 }
+
