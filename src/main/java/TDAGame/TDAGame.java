@@ -59,7 +59,7 @@ public class TDAGame extends History{
       * @return un String con la información del juego.
       */
      public String toString() {
-        return "p1=" + this.getPlayer1().getName() + ", "+ this.getPlayer1().getId() + ", " +this.getPlayer1().getColor() + ", p2=" + this.getPlayer2().getName() + ", "+ this.getPlayer2().getId() + ", " +this.getPlayer2().getColor() + ", Turno de jugador :" + this.getCurrentTurn();
+        return "p1=" + this.getPlayer1().getName() + ", "+ this.getPlayer1().getId() + ", " +this.getPlayer1().getColor() + ", p2=" + this.getPlayer2().getName() + ", "+ this.getPlayer2().getId() + ", " +this.getPlayer2().getColor() + ", Turno de jugador :" + this.getCurrentTurn() + ", Estado (Victorio): "+ this.getBoard().entregarGanador() + ", Tablero(se puede jugar): "+this.getBoard().can_play();
      }
 
     //Setter's
@@ -210,7 +210,7 @@ public class TDAGame extends History{
 
     public void realizarMovimiento(TDAPlayer playerAct, int columna ){
         if(playerAct.getId()==this.getPlayer1().getId() && playerAct.getId()==this.getCurrentTurn()){
-            Casilla aux= new Casilla(playerAct.getColor(), playerAct.getId());
+            TDAPiece aux= new TDAPiece(playerAct.getColor(), playerAct.getId());
             board.playpiece(columna,aux);
             this.setCurrentTurn(this.getPlayer2().getId());
             this.getPlayer1().setRemainingPieces(this.getPlayer1().getRemainingPieces()-1);
@@ -224,7 +224,7 @@ public class TDAGame extends History{
             //this.boardGetState();
         }
         else if(playerAct.getId()==this.getPlayer2().getId() && playerAct.getId()==this.getCurrentTurn()){
-            Casilla aux= new Casilla(playerAct.getColor(), playerAct.getId());
+            TDAPiece aux= new TDAPiece(playerAct.getColor(), playerAct.getId());
             board.playpiece(columna,aux);
             this.setCurrentTurn(this.getPlayer1().getId());
             this.getPlayer2().setRemainingPieces(this.getPlayer2().getRemainingPieces()-1);
