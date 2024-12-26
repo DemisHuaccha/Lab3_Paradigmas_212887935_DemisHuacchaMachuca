@@ -239,4 +239,19 @@ public class TDAGame extends History{
         }
     }
 
+    public void verificarTurnos(ArrayList<History> history){
+        if(history.size() == this.getTurnosMaximos()){
+            this.getPlayer1().setRemainingPieces(0);
+            this.getPlayer2().setRemainingPieces(0);
+        }
+        else if((history.size()%2) !=0){
+            this.getPlayer1().setRemainingPieces(this.getTurnosMaximos()-((this.getHistory().size()/2)+1));
+            this.getPlayer2().setRemainingPieces(this.getTurnosMaximos()-(this.getHistory().size()/2));
+        }
+        else{
+            this.getPlayer1().setRemainingPieces(this.getTurnosMaximos()-(this.getHistory().size()/2));
+            this.getPlayer2().setRemainingPieces(this.getTurnosMaximos()-(this.getHistory().size()/2));
+        }
+    }
+
 }
